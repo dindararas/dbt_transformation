@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: stg_rentals
+    description:  "Staging table for rental transaction. One row represents one rental transaction"
+    columns:
+      - name: rental_id
+        description: "Primary key for rental transaction"
+        data_type: integer
+        data_tests: [unique, not_null]
+    
+      - name: customer_id
+        description: "Foreign key to stg_customers that indicates customer who rented item"
+        data_type: integer
+        data_tests: 
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+
+      - name: inventory_id 
+        description: "Foreign key to stg_inventory that indicates the rented inventory item "
+        data_type: integer
+        data_tests: 
+          - not_null
+          - relationships:
+              to: ref('stg_inventory')
+              field: inventory_id
+
+      - name: staff_id 
+        description: "Staff who processed the rental transaction"
+        data_type: integer
+
+      - name: rented_at
+        description: "Timestamp when item was rented "
+        data_type: timestamp
+        data_tests: [not_null]
+
+      - name: returned_at
+        description: "Timestamp when item was returned "
+        data_type: timestamp

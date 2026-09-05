@@ -1,0 +1,15 @@
+-- stg_customers from pagila source
+WITH source AS (
+    SELECT * 
+    FROM {{ source('pagila', 'customer') }}
+)
+
+SELECT 
+    customer_id
+    , first_name
+    , last_name
+    , email
+    , active AS is_active
+    , create_date AS created_at
+    , last_update::TIMESTAMP
+FROM source

@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: stg_films
+    description: "Staging model for film. One rows represents information about one film"
+    columns:
+      - name: film_id
+        description: "Primary key for film information"
+        data_type: integer 
+        data_tests: [unique, not_null]
+    
+      - name: title
+        description: "Movie title"
+        data_type: text
+        data_tests: [not_null]
+
+      - name: description
+        description: "Summarized information about the film"
+        data_type: text
+
+      - name: rental_rate
+        description: "Rating for film ranging from 0 to 5"
+        data_type: numeric
+
+      - name: replacement_cost
+        description: "Cost charged to the customer if the film is lost or damaged which will be used to replace the film in inventory"
+        data_type: numeric
+        data_tests: [non_negative]
+
+      - name: length_minutes
+        description: "Film duration in minutes"
+        data_type: integer
+        data_tests: [non_negative]
+
+      - name: rating
+        description: "MPPA Rating"
+        data_type: text
+        data_tests:
+          - accepted_values:
+              values: ['G', 'PG', 'PG-13', 'R', 'NC-17']

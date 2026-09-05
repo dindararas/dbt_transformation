@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Staging model for customer information. One row represents one customer information"
+    columns:
+      - name: customer_id
+        description: "Primary key for the customer"
+        data_type: integer
+        data_tests: [unique, not_null]
+    
+      - name: first_name
+        description: "Customer's first name"
+        data_type: varchar
+        data_tests: [not_null]
+
+      - name: last_name
+        description: "Customer's last name"
+        data_type: varchar
+
+      - name: email
+        description: "Valid customer email address"
+        data_type: varchar
+
+      - name: is_active
+        description: "Current active status of customer"
+        data_type: integer
+        data_tests:
+          - accepted_values:
+              values: [0,1]
+
+      - name: created_at
+        description: "The date when the record was first created"
+        data_type: date
+        data_tests: [not_null]
+
+      - name: last_update
+        description: "The timestamp when the record was last updated"
+        data_type: timestamp
+        data_tests: [not_null]

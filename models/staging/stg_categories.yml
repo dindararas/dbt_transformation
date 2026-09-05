@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_categories
+    description: "Staging model for categories that include the category name. One row represents one category"
+    columns:
+      - name: category_id
+        description: "Primary key for stg_categories"
+        data_type: integer 
+        data_tests: [unique, not_null]
+    
+      - name: category_name
+        description: "Name for each category_id"
+        data_type: text
+
+      - name: last_update
+        description: "Timestamp when the category being updated"
+        data_type: timestamp

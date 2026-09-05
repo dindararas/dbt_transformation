@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: stg_payments
+    description:  "Staging model for payment. One row represents one rental payment"
+    columns:
+      - name: payment_id
+        description: "Primary key for payment information"
+        data_type: integer 
+        data_tests: [unique, not_null]
+    
+      - name: customer_id
+        description: "Foreign key to stg_customers that indicates customer who rented item"
+        data_type: integer
+        data_tests: 
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+  
+      - name: rental_id
+        description: "Foreign key to stg_rentals that indicate rental transaction"
+        data_type: integer
+        data_tests: 
+          - not_null
+          - relationships:
+              to: ref('stg_rentals')
+              field: rental_id
+
+      - name: staff_id 
+        description: "Staff who processed the rental transaction"
+        data_type: integer
+        data_tests: [not_null]
+
+      - name: amount
+        description: "Total amount paid in the transaction"
+        data_type: numeric
+        data_tests: [non_negative]
+      
+      - name: paid_at
+        description: "Timestamp when the transaction paid"
+        data_type: timestamp
+        data_tests: [not_null]

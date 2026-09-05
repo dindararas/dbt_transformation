@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_film_categories
+    description: "Staging model for film category. One film_id can have multiple categories"
+    columns:
+      - name: film_id
+        description: "Identifier for film"
+        data_type: integer 
+        data_tests: [not_null]
+    
+      - name: category_id
+        description: "Identifier for film category"
+        data_type: integer
+
+      - name: last_update
+        description: "Timestamp when the category being updated"
+        data_type: timestamp

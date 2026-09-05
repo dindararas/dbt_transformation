@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_stores
+    description:  "Staging model for store. One row represents one store"
+    columns:
+      - name: store_id
+        description: "Primary key for store information"
+        data_type: integer 
+        data_tests: [unique, not_null]
+    
+      - name: manager_staff_id
+        description: "Manager ID who is responsible for the store"
+        data_type: integer
+        data_tests: [not_null]
+
+      - name: address_id
+        description: "Identifier for store address. 1 address ID can have multiple store ID"
+        data_type: integer
+        data_tests: [not_null]

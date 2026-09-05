@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: mart_daily_revenue
+    description:  "Aggregated mart table for daily revenue per day per store "
+    columns:
+      - name: paid_date
+        description: "Date when the transaction paid"
+        data_type: date
+        data_tests: [not_null]
+    
+      - name: store_id
+        description: "Identifier for store"
+        data_type: integer
+        data_tests: [not_null]
+
+      - name: total_payments
+        description: "Number of payments per paid_date and store_id"
+        data_type: integer
+        data_tests: [not_null]
+
+      - name: unique_customers
+        description: "Distinct customers per paid_date and store_id"
+        data_type: integer
+        data_tests: [not_null]
+
+      - name: total_revenue
+        description:  "Total amount per paid date and store id"

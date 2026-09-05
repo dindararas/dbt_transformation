@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: dim_films
+    description: "Dimension table for film"
+    columns:
+      - name: film_id
+        description: "Primary key for film"
+        data_type: integer 
+        data_tests: [unique, not_null]
+    
+      - name: title
+        description: "Movie title"
+        data_type: text
+        data_tests: [not_null]
+
+      - name: category
+        description: "Category for film. One film may have several categories"
+        data_type: text
+
+      - name: rating
+        description: "MPPA Rating"
+        data_type: text
+        data_tests:
+          - accepted_values:
+              values: ['G', 'PG', 'PG-13', 'R', 'NC-17']
+
+      - name: rating_description
+        description: "Detailed description for MPPA rating"
+        data_type: text
+
+      - name: rental_rate
+        description: "Detailed description for MPPA rating"
+        data_type: numeric
+        data_tests: [non_negative, not_null]
+
+      - name: inventory_count
+        description: "Number of inventory_id in stg_inventory to indicate the number of film items in store inventory"
+        data_type: integer
+        data_tests: [not_null, non_negative]
+
+      - name: times_rented
+        description: "Number of rentals of film"
+        data_type: integer
+        data_tests: [not_null, non_negative]
+
+      - name: is_available
+        description: "A column that indicates whether the film is available or not (inventory_count>0)"
+        data_type: Boolean
+        data_tests: [not_null]

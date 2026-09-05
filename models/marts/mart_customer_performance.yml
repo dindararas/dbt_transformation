@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: mart_customer_performance
+    description: "Mart table that includes the information about customer performance"
+    columns:
+      - name: customer_id
+        description: "Primary key"
+        data_type: integer 
+        data_tests: [unique, not_null]
+    
+      - name: customer_name
+        description: "Customer full name"
+        data_type: text
+        data_tests: [not_null]
+
+      - name: total_rentals
+        description: "Number of rentals per customer"
+        data_type: integer
+        data_tests: [not_null]
+
+      - name: first_rented_at
+        description: "First date when the customer rent the film"
+        data_type: timestamp
+
+      - name: last_rented_at
+        description: "Last date when the customer rent the film"
+        data_type: timestamp
+
+      - name: lifetime_payment_total
+        description: "Total amount of all the customer's payment since the first rental"
+        data_type: numeric
+        data_tests: [not_null, non_negative]
+
+      - name: average_payment_value
+        description: "Total lifetime payment total divided by total rentals"
+        data_type: numeric
+        data_tests: [not_null, non_negative]

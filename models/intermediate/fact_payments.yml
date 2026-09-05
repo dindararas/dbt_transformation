@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: fact_payments
+    description:  "Fact table that includes payment-related information"
+    columns:
+      - name: payment_id
+        description: "Primary key for payment"
+        data_type: integer 
+        data_tests: [unique, not_null]
+    
+      - name: paid_at
+        description: "Timestamp when the transaction paid"
+        data_type: timestamp
+
+      - name: paid_date
+        description: "Date when the transaction paid"
+        data_type: date
+
+      - name: customer_id
+        description: "Foreign key for dim_customers"
+        data_type: integer
+        data_tests: 
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: customer_name
+        description: "Customer full name by concating first name and last name from stg_customers"
+        data_type: text
+        data_tests: [not_null]
+
+      - name: staff_id 
+        description: "Staff who processed the rental transaction"
+        data_type: integer
+        data_tests: [ not_null]
+
+      - name: store_id
+        description: "Store where the transaction occurred"
+        data_type: integer 
+        data_tests: [not_null]
+
+      - name: rental_id
+        description: "ID per item rental"
+        data_type: integer
+        data_tests: [not_null]
+
+      - name: film_id
+        description: "Foreign key for dim_films"
+        data_type: integer
+        data_tests: 
+          - not_null
+          - relationships:
+              to: ref('dim_films')
+              field: film_id
+
+      - name: film_title
+        description: "Movie title"
+        data_type: text
+
+      - name: amount
+        description: "Total amount paid in the transaction"
+        data_type: numeric
+        data_tests: [non_negative]

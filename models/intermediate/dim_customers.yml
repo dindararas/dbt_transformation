@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description:  "Dimension table for customer that includes the aggregated information about customer"
+    columns:
+      - name: customer_id 
+        description: "Primary key for the customer"
+        data_type: integer 
+        data_tests: [unique, not_null]
+    
+      - name: customer_name
+        description: "Customer's full name by concating first name and last name from stg_customers"
+        data_type: text
+        data_tests: [not_null]
+
+      - name: total_rentals
+        description: "Number of rentals per customer"
+        data_type: integer
+        data_tests: [not_null]
+
+      - name: first_rented_at
+        description: "First date when the customer rent the film"
+        data_type: timestamp
+
+      - name: last_rented_at
+        description: "Last date when the customer rent the film"
+        data_type: timestamp
+
+      - name: lifetime_payment_total
+        description: "Total amount of all the customer's payment since the first rental"
+        data_type: numeric
+        data_tests: [not_null, non_negative]

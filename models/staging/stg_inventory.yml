@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stg_inventory
+    description:  "Staging model for inventory. One row represents one inventory"
+    columns:
+      - name: inventory_id
+        description: "Primary key for inventory information"
+        data_type: integer 
+        data_tests: [unique, not_null]
+    
+      - name: film_id
+        description: "Foreign key to stg_films. Unique identifier for film"
+        data_type: integer
+        data_tests: 
+          - not_null
+          - relationships:
+              to: ref('stg_films')
+              field: film_id
+
+      - name: store_id
+        description: "Foreign key to stg_stores. Unique identifier for store"
+        data_type: integer
+        data_tests: 
+          - not_null
+          - relationships:
+              to: ref('stg_stores')
+              field: store_id
